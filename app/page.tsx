@@ -142,14 +142,71 @@ export default function Home() {
 
       {/* CONTACT SECTION */}
       <section id="contact" className="min-h-screen flex flex-col items-center justify-center bg-[#fff] px-6">
-        <h2 className="text-4xl text-gray-900 md:text-5xl font-bold mb-6">Let's Connect</h2>
-        <p className="text-gray-700 mb-8">Have a project in mind? Let's build something great together.</p>
-        <a 
-          href="mailto:your@email.com" 
-          className="text-2xl md:text-3xl font-bold text-gray-400 hover:underline"
-        >
-          alvenoblefias@example.com
-        </a>
+        <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-black/70 to-transparent z-50 pointer-events-none" />
+        
+        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          
+          {/* Left Side: Contact Information */}
+          <div className="flex flex-col justify-center">
+            <h2 className="text-4xl text-gray-900 md:text-5xl font-bold mb-6">Get in touch with us</h2>
+            <ul className="contact-details text-[22px] flex flex-col gap-[20px]">
+              <li className="phone text-gray-500 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-phone text-[32px] text-gray-700 w-[32px]"></i>
+                <a href="tel:09279840471" className="text-500">+63927-984-0471</a>
+              </li>
+              <li className="email text-gray-500 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-envelope text-[32px] text-gray-700 w-[32px]"></i>
+                <a href="mailto:oblefiasalven@gmail.com" className="text-500">oblefiasalven@gmail.com</a>
+              </li>
+              <li className="address text-gray-500 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-location-dot text-[32px] text-gray-700 w-[32px]"></i>
+                City of San Jose Del Monte, Bulacan, Philippines
+              </li>
+            </ul>
+            
+          </div>
+
+          {/* Right Side: Contact Form */}
+          <div className="bg-white/5 p-8 md:p-10 rounded-3xl border border-white/10 backdrop-blur-sm w-full shadow-2xl">
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1">Your Name</label>
+                  <input 
+                    type="text" 
+                    placeholder="John Doe"
+                    className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1">Email Address</label>
+                  <input 
+                    type="email" 
+                    placeholder="john@example.com"
+                    className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                  />
+                </div>
+              </div>
+              
+              <div className="flex flex-col gap-2">
+                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1">Message</label>
+                <textarea 
+                  rows={4}
+                  placeholder="Tell me about your project..."
+                  className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none"
+                />
+              </div>
+
+              <button 
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-[0.98]"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+
+        </div>
       </section>
       <section className="flex flex-col items-center justify-center bg-[#0a0a0a] py-[10px] px-0">
         <div>
