@@ -100,16 +100,16 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="min-h-screen flex flex-col items-center justify-center px-6">
-        <h2 className="text-4xl md:text-5xl font-bold mb-8">About Me</h2>
-        <p className="max-w-2xl text-center text-gray-400 text-lg">
+      <section id="about" className="min-h-screen flex flex-col items-center justify-center bg-[#fff] px-6">
+        <h2 className="text-4xl text-gray-900 md:text-5xl font-bold mb-8">About Me</h2>
+        <p className="max-w-2xl text-center text-gray-700 text-lg">
           I am a passionate developer focused on creating clean, responsive, and user-friendly applications. 
           With an eye for detail and a love for modern technologies.
         </p>
       </section>
 
       {/* PROJECTS SECTION */}
-      <section id="projects" className="min-h-screen py-24 px-6 flex flex-col items-center">
+      <section id="projects" className="min-h-screen py-24 px-6 flex flex-col items-center justify-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Featured Projects</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl w-full">
@@ -141,17 +141,21 @@ export default function Home() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="min-h-screen flex flex-col items-center justify-center px-6">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's Connect</h2>
-        <p className="text-gray-400 mb-8">Have a project in mind? Let's build something great together.</p>
+      <section id="contact" className="min-h-screen flex flex-col items-center justify-center bg-[#fff] px-6">
+        <h2 className="text-4xl text-gray-900 md:text-5xl font-bold mb-6">Let's Connect</h2>
+        <p className="text-gray-700 mb-8">Have a project in mind? Let's build something great together.</p>
         <a 
           href="mailto:your@email.com" 
-          className="text-2xl md:text-3xl font-bold text-blue-500 hover:underline"
+          className="text-2xl md:text-3xl font-bold text-gray-400 hover:underline"
         >
           alvenoblefias@example.com
         </a>
       </section>
-
+      <section className="flex flex-col items-center justify-center bg-[#0a0a0a] py-[10px] px-0">
+        <div>
+          <p>© 2026 Alven Oblefias. All rights reserved.</p>
+        </div>
+      </section>
     </main>
   );
 }
