@@ -6,6 +6,9 @@ import Image from "next/image";
 
 export default function Home() {
   const fullText = "Alven Oblefias";
+  
+  // MGA HOOKS (Dapat nasa loob ng function body)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(150);
@@ -69,13 +72,14 @@ export default function Home() {
               From concept to creation — building websites that are not only functional, 
               but beautifully crafted.
             </p>
-            <div>
+            <div className="flex gap-[20px] flex-wrap">
               <a 
                 href="#projects" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg shadow-blue-600/20"
+                className="bg-gray-600 hover:bg-gray-700 text-blue px-8 py-3 rounded-full font-semibold transition-all shadow-lg shadow-gray-600/20"
               >
                 View My Work
               </a>
+              <a href="/images/cv.pdf" download="Alven Oblefias CV.pdf" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg shadow-blue-600/20">Download CV</a>
             </div>
           </div>
 
@@ -100,9 +104,9 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="min-h-screen flex flex-col items-center justify-center bg-[#fff] px-6">
-        <h2 className="text-4xl text-gray-900 md:text-5xl font-bold mb-8">About Me</h2>
-        <p className="max-w-2xl text-center text-gray-700 text-lg">
+      <section id="about" className="bg-gray-900 min-h-screen flex flex-col items-center justify-center px-6">
+        <h2 className="text-4xl md:text-5xl font-bold mb-8">About Me</h2>
+        <p className="max-w-2xl text-center text-lg">
           I am a passionate developer focused on creating clean, responsive, and user-friendly applications. 
           With an eye for detail and a love for modern technologies.
         </p>
@@ -110,19 +114,38 @@ export default function Home() {
 
       {/* PROJECTS SECTION */}
       <section id="projects" className="min-h-screen py-24 px-6 flex flex-col items-center justify-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Featured Projects</h2>
+        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-white">Featured Projects</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl w-full">
           {projects.map((project, idx) => (
             <div 
-              key={idx} 
-              className="p-8 border border-white/10 rounded-3xl bg-white/5 hover:bg-white/10 transition-all duration-300 group"
+              key={idx}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              // Dynamic background gamit ang inline style para sa hover color
+              style={{ 
+                backgroundColor: hoveredIndex === idx ? project.hoverColor : "rgba(255, 255, 255, 0.05)" 
+              }}
+              className="p-8 border border-white/10 rounded-3xl transition-all duration-300 group"
             >
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-500 transition-colors">
+              {project.image && (
+                <div className="relative w-full h-48 mb-6 overflow-hidden rounded-xl bg-black/20">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              )}
+              <h3 className="text-2xl font-bold mb-3 transition-colors text-white">
                 {project.title}
               </h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">
+              <p className="text-400 mb-6 leading-relaxed">
                 {project.description}
+              </p>
+
+              <p className="text-400 mb-6 leading-relaxed">
+                <a href={project.url_link} target="_blank" rel="noopener noreferrer" className="text-500 hover:underline break-all">{project.url_link}</a>
               </p>
               
               <div className="flex flex-wrap gap-2">
@@ -141,7 +164,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="min-h-screen flex flex-col items-center justify-center bg-[#fff] px-6">
+      <section id="contact" className="bg-gray-900 min-h-screen flex flex-col items-center justify-center px-6">
         <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-black/70 to-transparent z-50 pointer-events-none" />
         
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -174,7 +197,7 @@ export default function Home() {
                   <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1">Your Name</label>
                   <input 
                     type="text" 
-                    placeholder="John Doe"
+                    placeholder="Juan Dela Cruz"
                     className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
                   />
                 </div>
@@ -182,7 +205,7 @@ export default function Home() {
                   <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1">Email Address</label>
                   <input 
                     type="email" 
-                    placeholder="john@example.com"
+                    placeholder="juan@example.com"
                     className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
                   />
                 </div>
@@ -208,7 +231,7 @@ export default function Home() {
 
         </div>
       </section>
-      <section className="flex flex-col items-center justify-center bg-[#0a0a0a] py-[10px] px-0">
+      <section className="flex flex-col items-center justify-center bg-[#000] py-[10px] px-0">
         <div>
           <p>© 2026 Alven Oblefias. All rights reserved.</p>
         </div>
