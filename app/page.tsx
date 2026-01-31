@@ -171,18 +171,18 @@ export default function Home() {
           
           {/* Left Side: Contact Information */}
           <div className="flex flex-col justify-center">
-            <h2 className="text-4xl text-gray-900 md:text-5xl font-bold mb-6">Get in touch with us</h2>
-            <ul className="contact-details text-[22px] flex flex-col gap-[20px]">
-              <li className="phone text-gray-500 font-medium flex items-center gap-[30px]">
-                <i className="fa-solid fa-phone text-[32px] text-gray-700 w-[32px]"></i>
+            <h2 className="text-4xl text-900 md:text-5xl font-bold mb-6">Get in touch with us</h2>
+            <ul className="contact-details flex flex-col gap-[20px]">
+              <li className="phone text-400 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-phone text-[32px] text-700 w-[32px]"></i>
                 <a href="tel:09279840471" className="text-500">+63927-984-0471</a>
               </li>
-              <li className="email text-gray-500 font-medium flex items-center gap-[30px]">
-                <i className="fa-solid fa-envelope text-[32px] text-gray-700 w-[32px]"></i>
+              <li className="email text-400 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-envelope text-[32px] text-700 w-[32px]"></i>
                 <a href="mailto:oblefiasalven@gmail.com" className="text-500">oblefiasalven@gmail.com</a>
               </li>
-              <li className="address text-gray-500 font-medium flex items-center gap-[30px]">
-                <i className="fa-solid fa-location-dot text-[32px] text-gray-700 w-[32px]"></i>
+              <li className="address text-400 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-location-dot text-[32px] text-700 w-[32px]"></i>
                 City of San Jose Del Monte, Bulacan, Philippines
               </li>
             </ul>
@@ -194,7 +194,7 @@ export default function Home() {
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1">Your Name</label>
+                  <label className="text-xs uppercase tracking-widest text-400 font-bold ml-1">Your Name</label>
                   <input 
                     type="text" 
                     placeholder="Juan Dela Cruz"
@@ -202,7 +202,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1">Email Address</label>
+                  <label className="text-xs uppercase tracking-widest text-400 font-bold ml-1">Email Address</label>
                   <input 
                     type="email" 
                     placeholder="juan@example.com"
@@ -212,7 +212,7 @@ export default function Home() {
               </div>
               
               <div className="flex flex-col gap-2">
-                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1">Message</label>
+                <label className="text-xs uppercase tracking-widest text-400 font-bold ml-1">Message</label>
                 <textarea 
                   rows={4}
                   placeholder="Tell me about your project..."
