@@ -63,14 +63,14 @@ export default function Home() {
       <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col justify-center order-2 lg:order-1">
-            <h6 className="text-blue-500 text-lg font-bold mb-2 tracking-widest uppercase">
+            <h6 className="text-500 text-lg font-bold mb-2 tracking-widest uppercase">
               Hey, I'm
             </h6>
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 min-h-[1.2em]">
               <span className="text-white">{displayText}</span>
               <span className={`${blink ? "opacity-100" : "opacity-0"} text-gray-700 ml-1`}>|</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed mb-8">
+            <p className="text-lg md:text-xl text-400 max-w-lg leading-relaxed mb-8">
               From concept to creation — building websites that are not only functional, but beautifully crafted.
             </p>
             <div className="flex gap-[20px] flex-wrap">
@@ -136,7 +136,7 @@ export default function Home() {
                     </div>
                   )}
                   <h3 className="text-2xl font-bold mb-3 text-white">{project.title}</h3>
-                  <p className="text-gray-400 mb-6 leading-relaxed line-clamp-2">{project.description}</p>
+                  <p className="text-400 mb-6 leading-relaxed line-clamp-2">{project.description}</p>
                   <p className="mb-6 mt-auto">
                     <a href={project.url_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline break-all text-sm">
                       {project.url_link}
@@ -156,11 +156,11 @@ export default function Home() {
         <style jsx global>{`
           .project-swiper .swiper-button-next {
             right: -20px !important;
-            color: #3b82f6 !important;
+            color: #fff !important;
           }
           .project-swiper .swiper-button-prev {
             left: -20px !important;
-            color: #3b82f6 !important;
+            color: #fff !important;
           }
           @media (max-width: 768px) {
             .project-swiper .swiper-button-next, .project-swiper .swiper-button-prev {
@@ -200,16 +200,16 @@ export default function Home() {
           <div className="flex flex-col justify-center">
             <h2 className="text-4xl text-white md:text-5xl font-bold mb-6">Get in touch with us</h2>
             <ul className="flex flex-col gap-[20px]">
-              <li className="text-gray-400 font-medium flex items-center gap-[30px]">
-                <i className="fa-solid fa-phone text-[32px] text-gray-600 w-[32px]"></i>
+              <li className="text-400 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-phone text-[32px] text-600 w-[32px]"></i>
                 <a href="tel:09279840471" className="hover:text-blue-500 transition-colors">+63927-984-0471</a>
               </li>
-              <li className="text-gray-400 font-medium flex items-center gap-[30px]">
-                <i className="fa-solid fa-envelope text-[32px] text-gray-600 w-[32px]"></i>
+              <li className="text-400 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-envelope text-[32px] text-600 w-[32px]"></i>
                 <a href="mailto:oblefiasalven@gmail.com" className="hover:text-blue-500 transition-colors">oblefiasalven@gmail.com</a>
               </li>
-              <li className="text-gray-400 font-medium flex items-center gap-[30px]">
-                <i className="fa-solid fa-location-dot text-[32px] text-gray-600 w-[32px]"></i>
+              <li className="text-400 font-medium flex items-center gap-[30px]">
+                <i className="fa-solid fa-location-dot text-[32px] text-600 w-[32px]"></i>
                 City of San Jose Del Monte, Bulacan, Philippines
               </li>
             </ul>
@@ -219,16 +219,16 @@ export default function Home() {
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Your Name</label>
+                  <label className="text-xs uppercase tracking-widest tex-500 font-bold">Your Name</label>
                   <input type="text" placeholder="Juan Dela Cruz" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Email Address</label>
+                  <label className="text-xs uppercase tracking-widest text-500 font-bold">Email Address</label>
                   <input type="email" placeholder="juan@example.com" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Message</label>
+                <label className="text-xs uppercase tracking-widest text-500 font-bold">Message</label>
                 <textarea rows={4} placeholder="Tell me about your project..." className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all resize-none" />
               </div>
               <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-[0.98]">
@@ -240,7 +240,7 @@ export default function Home() {
       </section>
 
       <footer className="flex flex-col items-center justify-center bg-black py-10">
-        <p className="text-gray-500">© 2026 Alven Oblefias. All rights reserved.</p>
+        <p className="text-500">© 2026 Alven Oblefias. All rights reserved.</p>
       </footer>
     </main>
   );
