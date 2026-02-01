@@ -108,7 +108,7 @@ export default function Home() {
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-white">Featured Projects</h2>
         
         {/* Container na may sapat na padding para sa arrows */}
-        <div className="max-w-6xl w-full px-4 md:px-12 relative group">
+        <div className="max-w-6xl w-full md:px-12 relative group">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={30}
