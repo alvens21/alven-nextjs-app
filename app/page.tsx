@@ -6,11 +6,20 @@ import Image from "next/image";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+
+const contactSchema = z.object({
+  name: z.string().min(1, { message: "This field is required." }),
+  email: z.string().email({ message: "This field is required." }),
+  message: z.string().optional(),
+});
 
 export default function Home() {
   const fullText = "Alven Oblefias";
@@ -21,6 +30,9 @@ export default function Home() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(150);
   const [blink, setBlink] = useState(true);
+  
+  // State para sa form submission status
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Cursor blinking effect
   useEffect(() => {
@@ -56,6 +68,50 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, typingSpeed]);
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(contactSchema),
+  });
+
+  // FORM SUBMISSION LOGIC
+  const onSubmit = async (data: any) => {
+    setIsSubmitting(true);
+    
+    const submissionData = {
+      ...data,
+      access_key: "4e1acccc-1445-4de5-a93b-3af0000030f9",
+    };
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Success! Your message has been sent.");
+        reset(); // Lilinisin ang form fields
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Error submitting the form.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <main className="scroll-smooth bg-black text-white">
       
@@ -74,11 +130,11 @@ export default function Home() {
               From concept to creation — building websites that are not only functional, but beautifully crafted.
             </p>
             <div className="flex gap-[20px] flex-wrap">
-              <a href="#projects" className="bg-gray-700 hover:bg-gray-800 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg">
+              <a href="#projects" className="bg-gray-700 hover:bg-white hover:text-gray-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg transition-all duration-[400ms] ease-in-out">
                 View My Work
               </a>
-              <a href="/images/cv.pdf" download="Alven_Oblefias_CV.pdf" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg">
-                Download CV
+              <a href="/#contact" className="bg-white hover:bg-gray-700 hover:text-white text-gray-700 px-8 py-3 rounded-full font-semibold transition-all shadow-lg transition-all duration-[400ms] ease-in-out">
+                Contact Us
               </a>
             </div>
           </div>
@@ -95,19 +151,87 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="bg-gray-900 min-h-screen flex flex-col items-center justify-center px-6">
-        <h2 className="text-4xl md:text-5xl font-bold mb-8">About Me</h2>
-        <p className="max-w-2xl text-center text-lg">
-          I am a passionate developer focused on creating clean, responsive, and user-friendly applications. 
-          With an eye for detail and a love for modern technologies.
-        </p>
+      <section id="about" className="bg-gray-900 text-white py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            <div className="space-y-8">
+              <div className="relative inline-block">
+                <img 
+                  src="/images/alven-side.png" 
+                  alt="Profile" 
+                  className="rounded-2xl w-full max-w-sm shadow-2xl border-2 border-500/30"
+                />
+                <div className="absolute -bottom-4 -right-4 bg-[#242D34] p-4 rounded-lg hidden md:block">
+                  <p className="font-bold text-2xl">5+ Years</p>
+                  <p className="text-sm">Experience</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-400">Core Stack</h3>
+                {[
+                  { name: "HTML/CSS/JS", width: "95%" },
+                  { name: "PHP", width: "85%" },
+                  { name: "WordPress & Elementor", width: "98%" },
+                  { name: "Divi & WP-Bakery", width: "90%" },
+                ].map((skill) => (
+                  <div key={skill.name}>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-sm font-medium">{skill.name}</span>
+                      <span className="text-sm font-medium">{skill.width}</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2.5">
+                      <div 
+                        className="bg-[#fff] h-2.5 rounded-full" 
+                        style={{ width: skill.width }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-5xl font-bold">
+                About Me
+              </h2>
+              <p className="text-gray-300 text-lg leading-relaxed">
+                I am a passionate developer focused on creating clean, responsive, and 
+                user-friendly applications. I don't just build websites; I make sure 
+                they perform at their peak.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                <div className="p-4 bg-gray-800 rounded-xl hover:border-blue-500 border border-transparent transition">
+                  <h4 className="font-bold text-400 mb-2">🚀 SEO & Speed</h4>
+                  <p className="text-sm text-400">Google Core Web Vitals optimization and on-page SEO strategy.</p>
+                </div>
+                <div className="p-4 bg-gray-800 rounded-xl hover:border-blue-500 border border-transparent transition">
+                  <h4 className="font-bold text-400 mb-2">🛠 Troubleshooting</h4>
+                  <p className="text-sm text-400">Expert at fixing plugin conflicts and theme-specific bugs.</p>
+                </div>
+                <div className="p-4 bg-gray-800 rounded-xl hover:border-blue-500 border border-transparent transition">
+                  <h4 className="font-bold text-400 mb-2">⚙️ Server Fixes</h4>
+                  <p className="text-sm text-400">Resolving 500 errors, database issues, and hosting migrations.</p>
+                </div>
+                <div className="p-4 bg-gray-800 rounded-xl hover:border-blue-500 border border-transparent transition">
+                  <h4 className="font-bold text-400 mb-2">🎨 Page Builders</h4>
+                  <p className="text-sm text-400">Custom dynamic layouts using Elementor, Divi, and WP-Bakery.</p>
+                </div>
+              </div>
+
+              <a href="/images/cv.pdf" download="Alven_Oblefias_CV.pdf" className="bg-white hover:bg-gray-700 hover:text-white text-gray-700 px-8 py-3 rounded-full font-semibold transition-all shadow-lg transition-all duration-[400ms] ease-in-out">
+                Download CV
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* PROJECTS SECTION */}
       <section id="projects" className="min-h-screen py-24 px-6 flex flex-col items-center justify-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-white">Featured Projects</h2>
-        
-        {/* Container na may sapat na padding para sa arrows */}
         <div className="max-w-6xl w-full md:px-12 relative group">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -154,43 +278,19 @@ export default function Home() {
         </div>
 
         <style jsx global>{`
-          .project-swiper .swiper-button-next {
-            right: -20px !important;
-            color: #fff !important;
-          }
-          .project-swiper .swiper-button-prev {
-            left: -20px !important;
-            color: #fff !important;
-          }
+          .project-swiper .swiper-button-next { right: -20px !important; color: #fff !important; }
+          .project-swiper .swiper-button-prev { left: -20px !important; color: #fff !important; }
           @media (max-width: 768px) {
-            .project-swiper .swiper-button-next, .project-swiper .swiper-button-prev {
-              display: none;
-            }
+            .project-swiper .swiper-button-next, .project-swiper .swiper-button-prev { display: none; }
           }
           .swiper-pagination-bullet { background: #4b5563 !important; }
           .swiper-pagination-bullet-active { background: #3b82f6 !important; }
-
-          .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
-              display: none;
-          }
-
+          .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal { display: none; }
           @media(max-width: 980px) {
-              .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
-                  display: block;
-              }
-
-              .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
-                  bottom: -45px;
-              }
+              .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal { display: block; bottom: -45px; }
           }
-
-          .swiper-wrapper {
-            display: flex !important;
-          }
-
-          .swiper-slide {
-            height: auto !important; /* Pinipilit ang slide na mag-stretch */
-          }
+          .swiper-wrapper { display: flex !important; }
+          .swiper-slide { height: auto !important; }
         `}</style>
       </section>
 
@@ -216,30 +316,54 @@ export default function Home() {
           </div>
 
           <div className="bg-white/5 p-8 md:p-10 rounded-3xl border border-white/10 backdrop-blur-sm shadow-2xl">
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs uppercase tracking-widest tex-500 font-bold">Your Name</label>
-                  <input type="text" placeholder="Juan Dela Cruz" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
+                  <label className="text-xs uppercase tracking-widest font-bold">Your Name</label>
+                  <input
+                    {...register("name")}
+                    type="text"
+                    placeholder="Juan Dela Cruz"
+                    className={`bg-white/5 border ${errors.name ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all`}
+                  />
+                  {errors.name && <span className="text-red-500 text-xs">{errors.name.message as string}</span>}
                 </div>
+
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs uppercase tracking-widest text-500 font-bold">Email Address</label>
-                  <input type="email" placeholder="juan@example.com" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
+                  <label className="text-xs uppercase tracking-widest font-bold">Email Address</label>
+                  <input
+                    {...register("email")}
+                    type="email"
+                    placeholder="juan@example.com"
+                    className={`bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all`}
+                  />
+                  {errors.email && <span className="text-red-500 text-xs">{errors.email.message as string}</span>}
                 </div>
               </div>
+
               <div className="flex flex-col gap-2">
-                <label className="text-xs uppercase tracking-widest text-500 font-bold">Message</label>
-                <textarea rows={4} placeholder="Tell me about your project..." className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all resize-none" />
+                <label className="text-xs uppercase tracking-widest font-bold">Message (Optional)</label>
+                <textarea
+                  {...register("message")}
+                  rows={4}
+                  placeholder="Tell me about your project..."
+                  className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all resize-none"
+                />
               </div>
-              <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-[0.98]">
-                Send Message
+
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className={`w-full ${isSubmitting ? 'bg-blue-800' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-[0.98]`}
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>
         </div>
       </section>
 
-      <footer className="flex flex-col items-center justify-center bg-black py-10">
+      <footer className="flex flex-col items-center justify-center bg-black py-4">
         <p className="text-500">© 2026 Alven Oblefias. All rights reserved.</p>
       </footer>
     </main>
