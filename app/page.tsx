@@ -217,7 +217,7 @@ export default function Home() {
                 </div>
                 <div className="p-4 bg-gray-800 rounded-xl hover:border-blue-500 border border-transparent transition">
                   <h4 className="font-bold text-400 mb-2">🎨 Page Builders</h4>
-                  <p className="text-sm text-400">Custom dynamic layouts using Elementor, Divi, and WP-Bakery.</p>
+                  <p className="text-sm text-400">Custom dynamic layouts using Elementor, Divi, Oxygen, and WP-Bakery.</p>
                 </div>
               </div>
 
