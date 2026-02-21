@@ -262,13 +262,13 @@ export default function Home() {
                   <h3 className="text-2xl font-bold mb-3 text-white">{project.title}</h3>
                   <p className="text-400 mb-6 leading-relaxed line-clamp-2">{project.description}</p>
                   <p className="mb-6 mt-auto">
-                    <a href={project.url_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline break-all text-sm">
+                    <a href={project.url_link} target="_blank" rel="noopener noreferrer" className="text-white hover:underline break-all text-sm">
                       {project.url_link}
                     </a>
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tag) => (
-                      <span key={tag} className="bg-blue-600/10 text-blue-400 text-xs px-4 py-1.5 rounded-full border border-blue-600/20">{tag}</span>
+                      <span key={tag} className="bg-white-600/10 text-400 text-xs px-4 py-1.5 rounded-full border border-white-600/20">{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -354,7 +354,7 @@ export default function Home() {
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className={`w-full ${isSubmitting ? 'bg-blue-800' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-[0.98]`}
+                className={`w-full ${isSubmitting ? 'bg-white' : 'bg-gray-700 hover:bg-white hover:text-gray-700 transition-all duration-[400ms] ease-in-out'} text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-[0.98]`}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
